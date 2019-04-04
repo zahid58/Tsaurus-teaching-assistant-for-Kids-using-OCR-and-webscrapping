@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tsaurus : Type in a Input</title>
+<link rel="stylesheet" href="styles.css">
+<script src="../main.js">
+</script>
+</head>
+<body style="background-color:orange;">
+
+<div id="loader">
+    <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="coverImage">
+    <img id="loadingGif" alt="loading gif image" src="loadingGif.gif" class="loading">
+    <p1 id="text1" style="right: 140px; top: 320px;text-align: center;">
+    just a moment....
+    <br/><br/>
+    <b>Mr. Tsaurus</b> is looking up the <b>word</b> for you ....
+    </p1>
+</div>
+
+
+<div id="board">
+    <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="coverImage">
+    <p class="header" style="text-align: center;">Type in a Word</p>
+    <p1 id="text1" style="right: 120px; text-align: center;">just type in a <b>word</b> you wanna know about.
+    <br/>
+    Mr. Tsaurus will help you understand what it means!
+    </p1>
+    <div id="menu" >
+        <input class="entry" type="text" id="input1" placeholder="type in a word here..."/>
+        <br/>
+        <button class="button" onclick ="callPython()"style="width: 200px;"><span>enter </span></button> 
+    </div>
+</div>
+
+</body>
+</html>
