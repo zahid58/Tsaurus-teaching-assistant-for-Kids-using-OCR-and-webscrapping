@@ -21,7 +21,7 @@ function createWindow () {
   mainWindow.loadFile('gui/gui.html')
 
   // Open the DevTools.
- mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -64,12 +64,7 @@ function processWord()
   location.replace("output.html");
 
     
-    /*for(var i=0;i<imageurls.length;i++)
-    {
-      var img = document.createElement("img");
-      img.src = imageurls[i];
-      document.getElementById("images_").appendChild(img);
-    }*/
+    
 }
 
 
@@ -83,13 +78,13 @@ function parseString(str) {
 
 function callPython()
 {
-
   const loader = document.getElementById("loader");
   loader.className += " show";
 
   const {PythonShell} = require("python-shell");
   const path = require("path");
   var word = document.getElementById("input1").value;
+  localStorage.setItem("word",word);
   document.getElementById("input1").value = "";
   const script_path = path.join(__dirname,'../backend/');
   let options = {
@@ -110,9 +105,9 @@ function callPython()
 //this function in OUTPUT.HTML
 function processOutput()
 {
+  document.getElementById("suppliedWord").innerHTML = localStorage.getItem("word");
   var dictionaryString ="";
   var encyclopediaString = "";
-  var imageurls =[]; 
   //need to make these above variables all scope
   const fs = require("fs");
   var filepath = "temp/dictionary.txt";
@@ -137,10 +132,38 @@ function processOutput()
   {
     alert(err);
   }
-  
+  filepath = "temp/imageurls.json";
+  try{
+    var imageurls = JSON.parse(fs.readFileSync(filepath));
+    imageurls = Object.keys(imageurls)
+    
+    /*imageurls.forEach(function(item){
+      
+    });*/
+    for(var i=0;i<imageurls.length;i++)
+    {
+      var x = document.createElement("IMG");
+      x.setAttribute("src", imageurls[i]);
+      x.setAttribute("width", "200");
+      x.setAttribute("height","140");
+      x.setAttribute("style","margin:4px;");
+      document.getElementById("images_").appendChild(x);
+    }
+  }
+  catch(err)
+  {
+    //
+  }
 }
 
+function callDetect(){
+//call the python OCR program
+}
 
+function getDetectedWords()
+{
+//get the detected words from temp/detected
+}
 /*
 python path --
 G:\anaconda3\python36.zip
@@ -151,4 +174,9 @@ G:\anaconda3\lib\site-packages
 G:\anaconda3\lib\site-packages\win32
 G:\anaconda3\lib\site-packages\win32\lib
 G:\anaconda3\lib\site-packages\Pythonwin
+*/
+
+/*
+<img src="1558.jpg" width="200px" > 
+
 */
