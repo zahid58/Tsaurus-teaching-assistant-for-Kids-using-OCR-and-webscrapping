@@ -3,8 +3,24 @@
 <head>
 <title>Tsaurus</title>
 <link rel="stylesheet" href="styles.css">
+<script src="../main.js">
+</script>
 </head>
 <body style="background-color:orange;">
+    
+    
+    <div id="loader">
+        <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="coverImage">
+        <img id="loadingGif" alt="loading gif image" src="loadingGif.gif" class="loading">
+        <p1 id="text1" style="right: 140px; top: 320px;text-align: center;">
+        <b>Capture</b> some text using your Camera...
+        <br/><br/>
+        <b>Mr. Tsaurus</b> is looking for <b>words</b> in the camera window....
+        </p1>
+    </div>
+
+
+
 <div id="board">
     <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="coverImage">
     <img id="logo" alt="logo" src="title.png" class="title">
@@ -12,7 +28,7 @@
     <p2 id="text2">just ask Mr. Tsaurus!</p2>
     <div id="menu" >
         <button class="button" style="vertical-align:middle" onclick='window.location.href="typedInput.html"'><span>Type in a Word </span></button>
-        <button class="button" style="vertical-align:middle"><span>Use Camera </span></button>
+        <button class="button" style="vertical-align:middle"onclick="callDetect();"><span>Use Camera </span></button>
         <button class="button" style="vertical-align:middle"><span>things you've learned so far.. </span></button>
         <button class="button" style="vertical-align:middle"><span>Quit</span></button>    
     </div>

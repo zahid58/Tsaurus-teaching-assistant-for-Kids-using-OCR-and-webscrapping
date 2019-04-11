@@ -8,11 +8,11 @@
 </head>
 <body>
 <div id="board">
-        <p class="headerOutput" style="text-align: center;">"supplied Word"</p>
+    <p id="suppliedWord" class="headerOutput" style="text-align: center;">"supplied Word"</p>
     <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="tsaurusImage">
-    
-    <div id="images_">
-        <p class = "labels" style="width:180px;font-family:'Roboto Slab'; font-size:18px; margin:2px;" >Images</p><br>
+    <div id="images_" style="text-align:center;">
+        <p class = "labels" style="width:180px;font-family:'Roboto Slab'; font-size:16px; margin:5px; left:10px;" >Images</p><br>
+      
     </div>
     <div id="encyclopedia">
         <p  class = "labels" style="width:180px;font-family:'Roboto Slab'; font-size:18px; margin:2px;">Encyclopedia</p><br>
@@ -22,7 +22,9 @@
     </div>
 </div>
 <script>
-window.onload = processOutput();
+processOutput();
+loadOutputImages();
+
 </script>
 </body>
 </html>

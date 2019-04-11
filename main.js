@@ -56,36 +56,32 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 
-
-//this function in typedInput.html
-function processWord()
-{   
-  //alert("in process word");
-  location.replace("output.html");
-
-    
-    
-}
-
-
 //***************************************
 
 
-//helper method
-function parseString(str) {
-  return str.replace(/#&#/g, '<br>')
+//this function in typedInput.html
+function processWordTypedInput()
+{   
+  var word=document.getElementById("input1").value;
+  localStorage.setItem("word",word);
+  callPython();
+}
+function processWordOcrInput(word)
+{
+  localStorage.setItem("word",word);
+  callPython();
 }
 
+
+//call processWord.py
 function callPython()
 {
+  
   const loader = document.getElementById("loader");
   loader.className += " show";
-
+  var word = localStorage.getItem("word");
   const {PythonShell} = require("python-shell");
   const path = require("path");
-  var word = document.getElementById("input1").value;
-  localStorage.setItem("word",word);
-  document.getElementById("input1").value = "";
   const script_path = path.join(__dirname,'../backend/');
   let options = {
     mode: 'text',
@@ -106,6 +102,7 @@ function callPython()
 function processOutput()
 {
   document.getElementById("suppliedWord").innerHTML = localStorage.getItem("word");
+  localStorage.removeItem("word");
   var dictionaryString ="";
   var encyclopediaString = "";
   //need to make these above variables all scope
@@ -113,8 +110,6 @@ function processOutput()
   var filepath = "temp/dictionary.txt";
   try{
     dictionaryString = fs.readFileSync(filepath, 'utf-8');
-    dictionaryString = parseString(dictionaryString);
-    //alert(dictionaryString);
     document.getElementById("dictionary").innerHTML += dictionaryString;
   }
   catch(err)
@@ -124,22 +119,24 @@ function processOutput()
   filepath = "temp/description.txt";
   try{
     encyclopediaString = fs.readFileSync(filepath,'utf-8');
-    encyclopediaString = parseString(encyclopediaString);
     document.getElementById("encyclopedia").innerHTML += encyclopediaString;
-    //alert(encyclopediaString);
   }
   catch(err)
   {
     alert(err);
   }
-  filepath = "temp/imageurls.json";
+  
+}
+
+function loadOutputImages()
+{
+  const fs = require("fs");
+  var filepath = "temp/imageurls.json";
   try{
     var imageurls = JSON.parse(fs.readFileSync(filepath));
     imageurls = Object.keys(imageurls)
     
-    /*imageurls.forEach(function(item){
-      
-    });*/
+    
     for(var i=0;i<imageurls.length;i++)
     {
       var x = document.createElement("IMG");
@@ -152,18 +149,68 @@ function processOutput()
   }
   catch(err)
   {
-    //
+     alert(err);
   }
 }
 
+
+
 function callDetect(){
-//call the python OCR program
+// call the python OCR program
+// go to a page thats supposed to run when ocr runs
+// then call ocr
+// wait for message
+// load ocrInput.html 
+// hopefully it will work
+  const loader = document.getElementById("loader");
+  loader.className += " show";
+  const {PythonShell} = require("python-shell");
+  const path = require("path");
+  const script_path = path.join(__dirname,'../backend/');
+  let options = {
+    mode: 'text',
+    pythonPath: "G:/anaconda3/python.exe",
+    scriptPath: "G:/PROJECTS/SoftDevProject/tsaurusElectron/backend",
+  }
+  console.log(options);
+  let pyWord = new PythonShell('ocrInput.py',options) ;
+  pyWord.on('message',function(message){
+    location.replace("ocrInput.html");
+  })
 }
 
 function getDetectedWords()
 {
-//get the detected words from temp/detected
+  const fs = require("fs");
+  var filepath = "temp/detected.json";
+  try{
+    var words = JSON.parse(fs.readFileSync(filepath));
+    words = Object.keys(words)
+    
+    for(var i=0;i<words.length;i++)
+    {
+      var x = document.createElement("button");
+      x.setAttribute("class", "button");
+      x.setAttribute("style", "width:auto; height:auto;font-size:auto;padding:5px;margin:5px;");
+      x.setAttribute("onclick","processWordOcrInput('"+words[i]+"');");
+      var buttoninside = "<span>"+words[i]+"</span>";
+      x.innerHTML = buttoninside;
+      document.getElementById("menu").appendChild(x);
+    }
+  }
+  catch(err)
+  {
+    //create a text saying ..sorry i could not detect anything..
+     alert(err);
+  }
 }
+
+
+
+/*imageurls.forEach(function(item){
+      
+    });*/
+
 /*
 python path --
 G:\anaconda3\python36.zip
@@ -179,4 +226,15 @@ G:\anaconda3\lib\site-packages\Pythonwin
 /*
 <img src="1558.jpg" width="200px" > 
 
+*/
+/*
+<div id="loader">
+    <img id="dinosaur" alt="mr. tsaurus image" src= "tsaurus.png" class="coverImage">
+    <img id="loadingGif" alt="loading gif image" src="loadingGif.gif" class="loading">
+    <p1 id="text1" style="right: 140px; top: 320px;text-align: center;">
+    capture some text in the camera window....
+    <br/><br/>
+    <b>Mr. Tsaurus</b> is looking for <b>words</b> in the camera window....
+    </p1>
+</div>
 */

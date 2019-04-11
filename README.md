@@ -1,24 +1,45 @@
-Project Title : Tsaurus - A Learning App for Kids using OCR and Web Scrapping
+# electron-quick-start
 
-Group details
- Md. Zahidul Islam, 160041010, Team Lead, Project Manager, UI design, Web
- Shafkat Rahman Farabi, 160041002, Developer, Database, Backend
- Nahid Hasan Shishir, 160041034, Developer, OCR, Mobile Dev
+**Clone and run for a quick way to see Electron in action.**
 
- Project Description :
-These days, even young kids at the age of just five of four use phone and PC. Our app will help these kids learn about new things in a fun way.
-We made up a cartoon character “Mr. Tsaurus” who is a wise and educated dinosaur who teaches young kids about new words.
-• Input : In the core functionality, user will input a word into the system. The Inputs can be given in two ways :
-1. Typed Input : user types in the word.
-2. OCR : user places the camera in front of the camera. The camera detects the word. This method will be handy for Kids. Because kids will find this method easier and lazier. Also many words can be detected from a single image making it very fast.
- An Image will be searched for the word and displayed.
- Using web crawling a small description of the word will be fetched and displayed from Encyclopedia Britannica and similar websites.
- Using a dictionary API the dictionary meaning of the word will be shown.
- A link will be there to more about the word which will redirect the user to a relevant webpage.
- A database will store all the previously learned words and descriptions so that they can be fetched locally next time without turning to web.
- UI needs to be friendly to little kids so that they enjoy using it.
- Some Additional functionalities will be added like learning Alphabets, learning randomly selected new word everyday.
- The app should be able to receive inputs correctly using OCR. Image processing is needed for better OCR operation. Invalid inputs will be handled and correct inputs will be suggested.
- The app has to collect description from web about the word using web crawling.
- The app will have display the dictionary meaning of the word using a Dictionary API.
- The app needs to save the words and descriptions learned previously in the database.
+This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
+
+**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
+
+A basic Electron application needs just these files:
+
+- `package.json` - Points to the app's main file and lists its details and dependencies.
+- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
+- `index.html` - A web page to render. This is the app's **renderer process**.
+
+You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
+
+## To Use
+
+To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+git clone https://github.com/electron/electron-quick-start
+# Go into the repository
+cd electron-quick-start
+# Install dependencies
+npm install
+# Run the app
+npm start
+```
+
+Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+
+## Resources for Learning Electron
+
+- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
+- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
+- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
+- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
+- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
+- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
+
+## License
+
+[CC0 1.0 (Public Domain)](LICENSE.md)

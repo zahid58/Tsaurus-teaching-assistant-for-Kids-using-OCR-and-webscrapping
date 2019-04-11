@@ -40,7 +40,7 @@ body{
     height:350px;
     width :700px;
     right:10px;
-    bottom:0px;
+    bottom:5px;
     margin: 80px;
     margin-bottom: 40px;
     position: absolute;
@@ -50,42 +50,44 @@ body{
 #images_{
     border: 4px solid gold;
     border-radius: 10px;
-    height: 335px;
+    height: 342px;
     width: 660px;
-    margin: 20px;
+    margin: 10px;
+    margin-bottom: 0px;
     position: absolute;
-    text-align: left;
     right:70px;
-    top: 10px;
-    padding: 10px;
+    top: 40px;
+    padding: 5px;
 }
 #dictionary{
     border: 4px solid gold;
     border-radius: 10px;
     height: 250px;
     width: 530px;
-    margin: 20px;
+    margin: 10px;
     position: absolute;
     text-align: left;
     right:70px;
-    bottom: 10px;;
+    bottom: 3px;;
     font-family: 'Roboto Slab';
     font-size: 20px;
     padding: 10px;
+    overflow-x: scroll;
 }
 #encyclopedia{
     border: 4px solid gold;
     border-radius: 10px;
     height: 250px;
     width: 510px;
-    margin: 20px;
+    margin: 10px;
     position: absolute;
     text-align: left;
     left: 50px;
-    bottom: 10px;
+    bottom: 3px;
     font-family: 'Roboto Slab';
     font-size: 20px;
     padding: 10px;
+    overflow-x: scroll;
 }
 
 
@@ -143,6 +145,7 @@ p2{
     color: darkgreen;
     border-radius: 6px;
     position: absolute;
+    top : 35px;
     left : 120px;
     width: 300px;
     font-family: 'Roboto Slab';
@@ -161,7 +164,8 @@ p2{
     float: left;
     margin: 20px;
     margin-top: 80px;
-    left:100px;
+    left:108px;
+    top: 40px;
     position:absolute;
 
 }
