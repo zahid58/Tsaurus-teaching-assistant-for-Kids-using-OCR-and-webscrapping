@@ -1,17 +1,23 @@
 from requests import get as reqGet
 from bs4 import BeautifulSoup
 from os import getcwd, path 
-from json import loads as jloads
 import threading
-import sys
+from json import loads as jloads
+from re import sub
+from string import punctuation
+from database import dbobject
 
 
 cwd = getcwd()
-savedir = path.join(path.dirname(cwd) + "\\tsauruselectron\\temp")
+savedir = path.join(path.dirname(cwd) + "\\tsaurusElectron\\temp")
 
 a = '-'
 b = '-'
 c = '-'
+
+global db
+db=dbobject()
+db.db__init__()
 
 def setImage(word):        #---------------#
     try:
@@ -21,25 +27,22 @@ def setImage(word):        #---------------#
         soup  =  BeautifulSoup(htmlContents,'lxml')
         image_tags = soup.find_all('img')
         count = 0
-        file = open(savedir+"\\imageurls.txt","w")
         for image_tag in image_tags:
-            if count>=4:
+            if count>=6:
                 break
             img_src = image_tag.get('src')
             if ('svg' not in img_src) and ('gif' not in img_src):
-                file.write(img_src+" #&#  ")
+                db.set_img_url(img_src)
                 count += 1
-        if count < 4:
-            rem = 4 - count
+        if count < 6:
+            rem = 6 - count
             for i in range(rem):
-                file.write(savedir+"\\errorImage.jpg"+" #&#  ")
-        file.close()
+                img_src = savedir+"\\errorImage.jpg"
+                db.set_img_url(img_src)
         global a 
         a = '+'
     except:
-        file = open(savedir+"\\imageurls.txt","w")
-        for i in range(5):
-            file.write(savedir+"\\errorImage.jpg"+" #&#  ")
+        pass
 
 def setDescription(word):      #--------------#
     try:
@@ -50,16 +53,13 @@ def setDescription(word):      #--------------#
         div_tag = soup.find("li",class_="mb-45")
         a = div_tag.find('a')
         a['href'] = "https://www.britannica.com" + a['href']
-        file = open(savedir+"\\description.txt","w")
-        file.write(str(div_tag))
-        file.close()
+        db.set_description(str(div_tag))
         global b
         b = '+'
     except:
-        file = open(savedir+"\\description.txt","w")
-        file.write("Oops! Mr. Taurus could not find the word in encyclopedia ! #&#  ")
-        file.close()
-
+        #"Oops! Mr. Taurus could not find the word in encyclopedia ! <br>  ")
+        pass
+        
 
 
 def setDictionary(word):
@@ -70,8 +70,7 @@ def setDictionary(word):
         data = jloads(resp.text)
         defis = data[0]['def'][0]['sseq']
         count = 0
-        file = open(savedir+"\\dictionary.txt","w")
-        
+        dict_string=""
         for defi in defis:
             count += 1 
             if(count>=4):
@@ -80,19 +79,19 @@ def setDictionary(word):
             text = text[1][4:]+"."
             text = text.replace("{it}", "\"")
             text = text.replace("{/it}","\"")
-            text = text.replace("{bc}","")
-            text = text.replace("{sx","")
-            text = text.replace("|}","")
-            text = text.replace("}","|")
-            file.write("=> " + text + " #&#  ")
-        file.write( "< " + data[0]['fl'] + " > #&#  ")
-        file.close()
+            text = text.replace("{bc}"," ")
+            text = text.replace("{sx"," ")
+            text = text.replace("|}"," ")
+            text = text.replace("}"," ")
+            text = sub('['+punctuation+']',' ',text)
+            text = sub('[0-9]+',' ',text)
+            dict_string += str("=> " + text + "<br>")
+        dict_string+= str( "< " + data[0]['fl'] + " >  <br> ")
+        db.set_dic_text(dict_string)
         global c 
         c = '+'
     except:
-        file = open(savedir+"\\dictionary.txt","w")
-        file.write("Oops! Mr.Tsaurus could not find the word! #&#  ")
-        file.close()
+        pass
 
 
 
@@ -100,16 +99,19 @@ def setDictionary(word):
 
 def main():
 
-    word = sys.argv[1]
+    word = "house"
+    db.set_word(word)
     t1=threading.Thread(target=setImage(word),args=())
     t2=threading.Thread(target=setDictionary(word),args=())
     t3=threading.Thread(target=setDescription(word),args=())
     t1.start()
     t2.start()
     t3.start()
+    db.save()
+    
+if __name__=="__main__":
+    main()
 
-
-main()
 status = a+b+c
 print(status)
 
