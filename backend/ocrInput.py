@@ -24,7 +24,7 @@ cap = None
 status = True
 bgrImage = None
 cwd = getcwd()
-savedir = path.join(path.dirname(cwd) + "\\tsaurusElectron\\temp")
+savedir = path.join(path.dirname(cwd) + "\\tsauruswithsqlite\\temp")
 
 class Thread(QThread):
     changePixmap = pyqtSignal(QImage)
@@ -49,7 +49,7 @@ class App(QMainWindow):
         self.title = 'Use Camera to Capture Words  | TSaurus- A learning App |'
         self.left= 100
         self.top= 100
-        self.width= 680
+        self.width= 680   
         self.height= 560
         self.set_of_words = None
         self.initUI()
@@ -93,7 +93,6 @@ class App(QMainWindow):
             # img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
             img = cv2.adaptiveThreshold(cv2.medianBlur(img, 3), 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,7, 2)
             # img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 9, 2)
-            
             result = []
             nouns={}
             text = (pytesseract.image_to_string(img,lang="eng")).lower()

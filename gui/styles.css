@@ -2,10 +2,10 @@ body{
     background-color: orange;
 }
 
-#loader{
+.loader{
 
         position : fixed;
-        z-index: 99;
+        z-index: 90;
         top : 0;
         left : 0;
         background-color: orange;
@@ -15,7 +15,7 @@ body{
         visibility: hidden;
 }
 
-#loader.show {
+.loader.show {
     animation: fadeIn 1s;
     animation-fill-mode: forwards;
 }
