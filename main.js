@@ -11,6 +11,7 @@ function createWindow () {
     width: 1280,
     height: 720,
     resizable: false,
+    minimizable: true,
     frame: false,
     webPreferences: {
       nodeIntegration: true
@@ -52,6 +53,16 @@ app.on('activate', function () {
   }
 })
 
+
+function closeWindow()
+{
+  window.close();
+}
+function minimizeWindow()
+{
+  const {remote} = require('electron');
+  remote.BrowserWindow.getFocusedWindow().minimize();
+}
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 

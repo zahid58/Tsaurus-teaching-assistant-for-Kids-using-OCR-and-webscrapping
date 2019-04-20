@@ -56,7 +56,7 @@ body{
     margin-bottom: 0px;
     position: absolute;
     right:70px;
-    top: 40px;
+    top: 44px;
     padding: 5px;
 }
 #dictionary{
@@ -237,3 +237,4 @@ p2{
     right: 0;
     transition:0.5s;
   }
+
