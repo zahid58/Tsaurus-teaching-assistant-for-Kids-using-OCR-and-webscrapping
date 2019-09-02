@@ -11,6 +11,5 @@
 ![](https://github.com/Zedd1558/Tsaurus-teaching-assistant-for-Kids-using-OCR-and-webscrapping/blob/master/FINAL%20PRESENTATION/Slide11.JPG)
 ![](https://github.com/Zedd1558/Tsaurus-teaching-assistant-for-Kids-using-OCR-and-webscrapping/blob/master/FINAL%20PRESENTATION/Slide12.JPG)
 ![](https://github.com/Zedd1558/Tsaurus-teaching-assistant-for-Kids-using-OCR-and-webscrapping/blob/master/FINAL%20PRESENTATION/Slide13.JPG)
-![](https://github.com/Zedd1558/Tsaurus-teaching-assistant-for-Kids-using-OCR-and-webscrapping/blob/master/FINAL%20PRESENTATION/Slide14.JPG)
 ![](https://github.com/Zedd1558/Tsaurus-teaching-assistant-for-Kids-using-OCR-and-webscrapping/blob/master/FINAL%20PRESENTATION/Slide15.JPG)
 
